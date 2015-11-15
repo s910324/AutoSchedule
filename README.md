@@ -16,4 +16,4 @@ Using <em>Pyautogui</em> to achieve auto type converted sheet to server web page
 + Number invalid/conflict will mark cell in <font color="#FF0044">Red</font>.
 
 ##screenshots
-![screenshot]("https://github.com/s910324/AutoSchedule/blob/master/screenshot/screenshot.png")
+![screenshot](https://github.com/s910324/AutoSchedule/blob/master/screenshot/screenshot.png)
