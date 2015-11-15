@@ -7,6 +7,8 @@ Using <em>Pyautogui</em> to achieve auto type converted sheet to server web page
 
 + Can Automatic detect input area by image recognition.
 
++ After starting type process, this program will minimize to tray, double click the tray icon can manually interrupt typing process.
+
 + Sheet can be preview in <em>preview window</em>.
 
 + Header subject error/repeate will mark header in <font color="#EE8100">Orange</font>.
