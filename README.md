@@ -1,0 +1,2 @@
+# AutoSchedule
+Schedule Typer
