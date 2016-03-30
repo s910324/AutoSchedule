@@ -204,8 +204,8 @@ class MainWindow(QDialog):
 
 
 	def checkTableValidation(self, detCol, table):
-		#	.[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  8,  9]
-		ws = [[], [], [], [], [], [], [], [], [], [], []]
+		#	.[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9]
+		ws = [[], [], [], [], [], [], [], [], [], []]
 		errStat = True
 		if len(detCol) == 0 or (0 in detCol):
 			errStat =  u'  狀態:  勤務表標頭錯誤,點選 [ --請選擇-- ] 選取有效標頭'
@@ -213,13 +213,13 @@ class MainWindow(QDialog):
 			if sorted(detCol)[i] == sorted(detCol)[i+1]:
 				errStat = u'  狀態:  勤務表標頭重複'
 				
-
+		print detCol
 		for c in xrange(table.columnCount()):
 			col = []
 			colNum = detCol[c]
 			for r in xrange(2, 26, 1):
 				col.append(table.item(r,c).text())
-			ws[colNum].append(col)
+			ws[colNum-1].append(col)
 		for i in xrange(len(ws)):
 			if len(ws[i]) == 0:
 				ws[i].append(['','','','','','','','','','','','','','','','','','','','','','','',''])
@@ -279,9 +279,10 @@ class MainWindow(QDialog):
 		return det
 
 	def newCombo(self):
+		taskList  = [u'--請選擇--', u'值班', u'救護勤務', u'備勤', u'待命服勤', u'水源查察', u'消防查察', u'宣導勤務', u'訓(演)練', u'專案勤務', u'南山救護站']
 		nComboBox = QComboBox()
-		nComboBox.addItems([u'--請選擇--', u'值班', u'救護勤務', u'備勤', u'待命服勤', u'水源查察', u'消防查察', u'勤務宣導', u'訓(演)練', u'龍舟警戒', u'其他', u'南山救護站'])
-		for i in xrange(12):
+		nComboBox.addItems(taskList)
+		for i in xrange(len(taskList)):
 			if i == 0:
 				nComboBox.setItemData(i, QColor('#550000'), Qt.BackgroundColorRole)
 			nComboBox.setItemData(i, Qt.AlignCenter, Qt.TextAlignmentRole)
@@ -336,7 +337,8 @@ class MainWindow(QDialog):
 
 	def determine(self, title):
 		cmpfactor = 0
-		smp = [u'值班', u'救護分隊務', u'備', u'待命服', u'水源', u'消防', u'宣導', u'訓演練', u'龍舟警戒', u'其他', u'南山站']
+
+		smp = [u'值班', u'救護分隊務', u'備', u'待命服', u'水源', u'消防', u'宣導', u'訓演練', u'專案其它', u'南山站']
 		for index, each in zip(xrange(len(smp)),smp):
 			for text in each:
 				for elem in title:
@@ -427,9 +429,12 @@ class startType (QThread):
 			for j in xrange(len(ws)):
 				if self.stopSign == 1:
 					break
-				sleep(0.3)
+
 				self.toCilpboard.emit(ws[j][0][i])
+				print ws[j][0][i]
+				sleep(0.3)
 				hotkey('ctrl', 'v')
+				sleep(0.3)
 				press('tab')
 		return 0
 
